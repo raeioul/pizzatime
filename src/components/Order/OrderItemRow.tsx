@@ -26,7 +26,6 @@ export default function OrderItemRow(props: Props) {
 
     return (
         <div className="py-4 border-b space-y-3">
-            {/* Top row: name, price, quantity */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                 <div className="font-medium text-base break-words">{name}</div>
                 <div className="flex flex-wrap gap-4 sm:gap-6 items-center">
@@ -37,8 +36,6 @@ export default function OrderItemRow(props: Props) {
                     />
                 </div>
             </div>
-
-            {/* Bottom row: subtotal, discount, line total + remove */}
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 text-sm text-slate-700">
                 <div className="space-y-0.5">
                     <div>Subtotal: {money(lineSubtotal)}</div>

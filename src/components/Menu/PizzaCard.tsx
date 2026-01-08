@@ -12,7 +12,11 @@ export default function PizzaCard({ pizza }: { pizza: Pizza }) {
     return (
         <div className="border rounded-lg p-4 bg-white shadow-sm flex flex-col gap-2">
             <img
-                src={'https://cdn.bolivia.com/gastronomia/2011/08/25/pizza-margarita-3684.jpg'}
+                src={pizza.imageUrl}
+                onError={(e) => {
+                    e.currentTarget.src =
+                        'https://cdn.bolivia.com/gastronomia/2011/08/25/pizza-margarita-3684.jpg'
+                }}
                 alt={pizza.name}
                 className="w-full h-40 object-cover rounded"
             />
