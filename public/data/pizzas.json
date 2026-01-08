@@ -1,0 +1,39 @@
+[
+    {
+        "id": "margherita",
+        "name": "Margherita",
+        "price": 5,
+        "ingredients": [
+            "tomato",
+            "mozzarella",
+            "basil"
+        ],
+        "imageUrl": "/images/margherita.jpg",
+        "category": "vegetarian"
+    },
+    {
+        "id": "hawaiana",
+        "name": "Hawaiana",
+        "price": 6,
+        "ingredients": [
+            "tomato",
+            "pineapple",
+            "cheese",
+            "ham"
+        ],
+        "imageUrl": "/images/hawaiana.jpg",
+        "category": "classic"
+    },
+    {
+        "id": "pepperoni",
+        "name": "Pepperoni",
+        "price": 7.5,
+        "ingredients": [
+            "tomato",
+            "mozzarella",
+            "pepperoni"
+        ],
+        "imageUrl": "/images/pepperoni.jpg",
+        "category": "meat"
+    }
+]
