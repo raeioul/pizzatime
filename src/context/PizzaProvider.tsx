@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import type { Pizza, MenuFilters } from '../types';
-import pizzasData from '../../public/data/pizzas.json';
+import pizzasData from '../data/pizzas.json';
 
 type PizzaContextValue = {
     pizzas: Pizza[];
