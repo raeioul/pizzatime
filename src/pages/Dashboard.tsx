@@ -9,7 +9,6 @@ export default function Dashboard() {
 
     return (
         <div className="flex flex-col gap-6 p-4 max-w-4xl mx-auto">
-            {/* Main content */}
             <div className="flex flex-col gap-4">
                 <MenuFilters />
                 <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -17,7 +16,6 @@ export default function Dashboard() {
                         <PizzaCard key={p.id} pizza={p} />
                     ))}
                 </div>
-
             </div>
             <OrderSummary />
             <PriceChart />
