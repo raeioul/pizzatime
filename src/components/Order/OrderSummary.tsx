@@ -1,12 +1,15 @@
-import { useOrderContext } from '../../context/OrderProvider';
+import { useAppSelector, useAppDispatch } from '../../redux/store';
+import { selectItems, selectTotals, confirmOrder } from '../../redux/orderSlice';
 import OrderItemRow from './OrderItemRow';
 import { money } from '../../utils/format';
 
 export default function OrderSummary() {
-    const { items, totals, confirmOrder } = useOrderContext();
+    const items = useAppSelector(selectItems);
+    const totals = useAppSelector(selectTotals);
+    const dispatch = useAppDispatch();
 
     const handleConfirm = () => {
-        const order = confirmOrder();
+        const order = dispatch(confirmOrder());
         if (order) {
             alert(`Order confirmed! Total: ${money(order.total)}\nOrder ID: ${order.id}`);
         } else {

@@ -2,12 +2,13 @@ import { Link } from 'react-router-dom';
 import type { Pizza } from '../../types';
 import QuantityInput from '../Common/QuantityInput';
 import { useState } from 'react';
-import { useOrderContext } from '../../context/OrderProvider';
+import { useAppDispatch } from '../../redux/store';
+import { addToOrder } from '../../redux/orderSlice';
 import { money } from '../../utils/format';
 
 export default function PizzaCard({ pizza }: { pizza: Pizza }) {
     const [qty, setQty] = useState(1);
-    const { addToOrder } = useOrderContext();
+    const dispatch = useAppDispatch();
 
     return (
         <div className="border rounded-lg p-4 bg-white shadow-sm flex flex-col gap-2">
@@ -31,7 +32,7 @@ export default function PizzaCard({ pizza }: { pizza: Pizza }) {
                 <QuantityInput value={qty} onChange={setQty} />
                 <button
                     className="px-3 py-1 rounded bg-slate-900 text-white hover:bg-slate-800"
-                    onClick={() => addToOrder(pizza, qty)}
+                    onClick={() => dispatch(addToOrder({ pizza, quantity: qty }))}
                 >
                     Add
                 </button>

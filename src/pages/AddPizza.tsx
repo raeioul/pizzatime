@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
-import { usePizzaContext } from '../context/PizzaProvider';
+import { useAppDispatch } from '../redux/store';
+import { addPizza } from '../redux/pizzaSlice';
 import type { Pizza } from '../types';
 import { useState } from 'react';
 
@@ -13,7 +14,7 @@ type FormState = {
 };
 
 export default function AddPizza() {
-    const { addPizza } = usePizzaContext();
+    const dispatch = useAppDispatch();
     const [success, setSuccess] = useState('');
 
     const {
@@ -50,7 +51,7 @@ export default function AddPizza() {
             description: data.description || undefined,
         };
 
-        addPizza(pizza);
+        dispatch(addPizza(pizza));
         setSuccess('Pizza added to menu!');
         reset();
     };

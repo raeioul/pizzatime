@@ -1,6 +1,7 @@
 import { money } from '../../utils/format';
 import QuantityInput from '../Common/QuantityInput';
-import { useOrderContext } from '../../context/OrderProvider';
+import { useAppDispatch } from '../../redux/store';
+import { updateQuantity, removeItem } from '../../redux/orderSlice';
 
 type Props = {
     pizzaId: string;
@@ -13,7 +14,7 @@ type Props = {
 };
 
 export default function OrderItemRow(props: Props) {
-    const { updateQuantity, removeItem } = useOrderContext();
+    const dispatch = useAppDispatch();
     const {
         pizzaId,
         name,
@@ -32,7 +33,7 @@ export default function OrderItemRow(props: Props) {
                     <div className="text-sm text-slate-600">{money(unitPrice)}</div>
                     <QuantityInput
                         value={quantity}
-                        onChange={(n) => updateQuantity(pizzaId, n)}
+                        onChange={(n) => dispatch(updateQuantity({ pizzaId, quantity: n }))}
                     />
                 </div>
             </div>
@@ -44,7 +45,7 @@ export default function OrderItemRow(props: Props) {
                 </div>
                 <button
                     className="px-3 py-1 bg-red-600 text-white rounded self-start sm:self-auto"
-                    onClick={() => removeItem(pizzaId)}
+                    onClick={() => dispatch(removeItem(pizzaId))}
                 >
                     Remove
                 </button>

@@ -1,6 +1,15 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
 import OrderItemRow from '../../src/components/Order/OrderItemRow';
-import { OrderProvider } from '../../src/context/OrderProvider';
+import orderReducer from '../../src/redux/orderSlice';
+
+const createTestStore = () =>
+    configureStore({
+        reducer: {
+            order: orderReducer,
+        },
+    });
 
 const mockItem = {
     pizzaId: 'margherita',
@@ -15,9 +24,9 @@ const mockItem = {
 describe('OrderItemRow', () => {
     it('renders item details', () => {
         render(
-            <OrderProvider>
+            <Provider store={createTestStore()}>
                 <OrderItemRow {...mockItem} />
-            </OrderProvider>
+            </Provider>
         );
 
         expect(screen.getByText(/Margherita/i)).toBeInTheDocument();
@@ -26,9 +35,9 @@ describe('OrderItemRow', () => {
 
     it('calls removeItem when clicking remove', () => {
         render(
-            <OrderProvider>
+            <Provider store={createTestStore()}>
                 <OrderItemRow {...mockItem} />
-            </OrderProvider>
+            </Provider>
         );
 
         fireEvent.click(screen.getByText(/Remove/i));

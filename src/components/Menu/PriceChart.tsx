@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
-import { usePizzaContext } from '../../context/PizzaProvider';
+import { useAppSelector } from '../../redux/store';
+import { selectFilteredPizzas } from '../../redux/pizzaSlice';
 
 export default function PriceChart() {
-    const { filtered } = usePizzaContext();
+    const filtered = useAppSelector(selectFilteredPizzas);
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const chartRef = useRef<Chart | null>(null);
 

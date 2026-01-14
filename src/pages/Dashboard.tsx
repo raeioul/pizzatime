@@ -1,11 +1,12 @@
-import { usePizzaContext } from '../context/PizzaProvider';
 import MenuFilters from '../components/Menu/MenuFilters';
 import PizzaCard from '../components/Menu/PizzaCard';
 import OrderSummary from '../components/Order/OrderSummary';
 import PriceChart from '../components/Menu/PriceChart';
+import { useAppSelector } from '../redux/store';
+import { selectFilteredPizzas } from '../redux/pizzaSlice';
 
 export default function Dashboard() {
-    const { filtered } = usePizzaContext();
+    const filtered = useAppSelector(selectFilteredPizzas);
 
     return (
         <div className="flex flex-col gap-6 p-4 max-w-4xl mx-auto">

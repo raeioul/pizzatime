@@ -1,11 +1,25 @@
 import { renderHook, act } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
 import { useMenuFilters } from '../../src/hooks/useMenuFilters';
-import { PizzaProvider } from '../../src/context/PizzaProvider';
+import pizzaReducer from '../../src/redux/pizzaSlice';
+import React from 'react';
+
+const createTestStore = () =>
+    configureStore({
+        reducer: {
+            pizza: pizzaReducer,
+        },
+    });
+
+const wrapper = ({ children }: { children: React.ReactNode }) => (
+    <Provider store= { createTestStore() } > { children } </Provider>
+);
 
 describe('useMenuFilters', () => {
     it('updates search filter', () => {
         const { result } = renderHook(() => useMenuFilters(), {
-            wrapper: PizzaProvider,
+            wrapper,
         });
 
         act(() => result.current.setFilters({ search: 'Margherita' }));
@@ -14,7 +28,7 @@ describe('useMenuFilters', () => {
 
     it('sets maxPrice correctly', () => {
         const { result } = renderHook(() => useMenuFilters(), {
-            wrapper: PizzaProvider,
+            wrapper,
         });
 
         act(() => result.current.setFilters({ maxPrice: 10 }));

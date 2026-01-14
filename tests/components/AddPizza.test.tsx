@@ -1,14 +1,23 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
 import AddPizza from '../../src/pages/AddPizza';
-import { PizzaProvider } from '../../src/context/PizzaProvider';
+import pizzaReducer from '../../src/redux/pizzaSlice';
 import { vi } from 'vitest';
+
+const createTestStore = () =>
+  configureStore({
+    reducer: {
+      pizza: pizzaReducer,
+    },
+  });
 
 describe('AddPizza form', () => {
   it('shows validation errors', async () => {
     render(
-      <PizzaProvider>
+      <Provider store={createTestStore()}>
         <AddPizza />
-      </PizzaProvider>
+      </Provider>
     );
 
     fireEvent.click(screen.getByText(/Add to menu/i));
@@ -22,9 +31,9 @@ describe('AddPizza form', () => {
     const alertSpy = vi.spyOn(window, 'alert').mockImplementation(() => { });
 
     render(
-      <PizzaProvider>
+      <Provider store={createTestStore()}>
         <AddPizza />
-      </PizzaProvider>
+      </Provider>
     );
 
     fireEvent.change(screen.getByLabelText(/Name/i), { target: { value: 'Margherita' } });

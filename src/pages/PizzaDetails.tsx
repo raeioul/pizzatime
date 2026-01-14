@@ -1,15 +1,16 @@
 import { useParams } from 'react-router-dom';
-import { usePizzaContext } from '../context/PizzaProvider';
-import { useOrderContext } from '../context/OrderProvider';
+import { useAppSelector, useAppDispatch } from '../redux/store';
+import { selectPizzas } from '../redux/pizzaSlice';
+import { addToOrder } from '../redux/orderSlice';
 import QuantityInput from '../components/Common/QuantityInput';
 import { useState } from 'react';
 import { money } from '../utils/format';
 
 export default function PizzaDetails() {
     const { id } = useParams<{ id: string }>();
-    const { pizzas } = usePizzaContext();
+    const pizzas = useAppSelector(selectPizzas);
     const pizza = pizzas.find(p => p.id === id);
-    const { addToOrder } = useOrderContext();
+    const dispatch = useAppDispatch();
     const [qty, setQty] = useState(1);
 
     if (!pizza) return <p>Pizza not found.</p>;
@@ -30,7 +31,7 @@ export default function PizzaDetails() {
                     <QuantityInput value={qty} onChange={setQty} />
                     <button
                         className="px-3 py-1 rounded bg-slate-900 text-white hover:bg-slate-800"
-                        onClick={() => addToOrder(pizza, qty)}
+                        onClick={() => dispatch(addToOrder({ pizza, quantity: qty }))}
                     >
                         Add to order
                     </button>

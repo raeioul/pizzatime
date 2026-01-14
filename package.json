@@ -15,10 +15,12 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.11.2",
     "chart.js": "^4.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.70.0",
+    "react-redux": "^9.2.0",
     "react-router-dom": "^6.23.0"
   },
   "devDependencies": {
